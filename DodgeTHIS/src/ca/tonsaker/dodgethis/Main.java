@@ -1,12 +1,12 @@
-package ca.tonsker.DodgeTHIS;
+package ca.tonsaker.dodgethis;
 
 import java.awt.EventQueue;
 import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
 
-import ca.tonsaker.SimpleGameEngine.engine.EngineFrame;
-import ca.tonsaker.SimpleGameEngine.engine.GameEngine;
+import ca.tonsaker.simplegameengine.engine.EngineFrame;
+import ca.tonsaker.simplegameengine.engine.GameEngine;
 
 public class Main extends GameEngine implements EngineFrame{
 	
