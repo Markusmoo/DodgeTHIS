@@ -54,19 +54,33 @@ public class MainMenuScreen implements EngineFrame, ActionListener{
 
 	@Override
 	public void update() {}
+	
+	private void cleanup(){
+		main.removeMouseListener(buttonPlay);
+		main.removeMouseListener(buttonConnect);
+		main.removeMouseListener(buttonHost);
+		main = null;
+		buttonPlay = null;
+		buttonConnect = null;
+		buttonHost = null;
+		background = null;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 		if(src == buttonPlay){
 			System.out.println("Switching Screens: PLAY");
-			Main.currentScreen = Main.SCREEN_PLAY;
+			main.switchScreen(Main.SCREEN_PLAY);
+			cleanup();
 		}else if(src == buttonConnect){
 			System.out.println("Switching Screens: CONNECT");
-			Main.currentScreen = Main.SCREEN_CONNECT;
+			main.switchScreen(Main.SCREEN_CONNECT);
+			cleanup();
 		}else if(src == buttonHost){
 			System.out.println("Switching Screens: HOST");
-			Main.currentScreen = Main.SCREEN_HOST;
+			main.switchScreen(Main.SCREEN_HOST);
+			cleanup();
 		}
 	}
 

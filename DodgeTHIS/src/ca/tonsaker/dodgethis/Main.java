@@ -22,14 +22,15 @@ public class Main extends GameEngine implements EngineFrame{
 	public static final int SCREEN_PLAY = 3;
 	
 	//Current Screen
-	public static int currentScreen = 0;
+	private static int currentScreen = 0;
 	
 	//Host to connect to and/or port to host on
 	public static int port = 25544;
 	public static byte[] ip = {127,0,0,1};
 	
 	//Screen Classes
-	public MainMenuScreen mainMenu;
+	public MainMenuScreen mainMenuScreen;
+	public HostScreen     hostScreen;
 
 	public static void main(String[] args){
 		EventQueue.invokeLater(new Runnable() {
@@ -55,27 +56,31 @@ public class Main extends GameEngine implements EngineFrame{
 		this.setUPS(100);
 		this.run();
 	}
+	
+	public void switchScreen(int screen){
+		Main.currentScreen = screen;
+		switch(currentScreen){
+			case(SCREEN_MAIN_MENU): mainMenuScreen.init(); break;
+			case(SCREEN_CONNECT): break;
+			case(SCREEN_HOST): hostScreen.init(); break;
+			case(SCREEN_PLAY): break;
+		default: throw new IllegalStateException("Unknown screen requested!");
+	}
+	}
 
 	@Override
 	public void init(){
-		
-		mainMenu = new MainMenuScreen(this);
-		
-		switch(currentScreen){
-			case(SCREEN_MAIN_MENU): mainMenu.init(); break;
-			case(SCREEN_CONNECT): break;
-			case(SCREEN_HOST): break;
-			case(SCREEN_PLAY): break;
-			default: throw new IllegalStateException("Unknown screen requested!");
-		}
+		mainMenuScreen = new MainMenuScreen(this);
+		hostScreen = new HostScreen(this);
+		switchScreen(Main.SCREEN_MAIN_MENU);
 	}
 
 	@Override
 	public void update() {
 		switch(currentScreen){
-			case(SCREEN_MAIN_MENU): mainMenu.update(); break;
+			case(SCREEN_MAIN_MENU): mainMenuScreen.update(); break;
 			case(SCREEN_CONNECT): break;
-			case(SCREEN_HOST): break;
+			case(SCREEN_HOST): hostScreen.update(); break;
 			case(SCREEN_PLAY): break;
 			default: throw new IllegalStateException("Unknown screen requested!");
 		}
@@ -84,9 +89,9 @@ public class Main extends GameEngine implements EngineFrame{
 	@Override
 	public void render(Graphics2D g) {
 		switch(currentScreen){
-			case(SCREEN_MAIN_MENU): mainMenu.render(g); break;
+			case(SCREEN_MAIN_MENU): mainMenuScreen.render(g); break;
 			case(SCREEN_CONNECT): break;
-			case(SCREEN_HOST): break;
+			case(SCREEN_HOST): hostScreen.render(g); break;
 			case(SCREEN_PLAY): break;
 			default: throw new IllegalStateException("Unknown screen requested!");
 		}
