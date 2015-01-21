@@ -64,8 +64,8 @@ public class Main extends GameEngine implements EngineFrame{
 			case(SCREEN_CONNECT): break;
 			case(SCREEN_HOST): hostScreen.init(); break;
 			case(SCREEN_PLAY): break;
-		default: throw new IllegalStateException("Unknown screen requested!");
-	}
+			default: throw new IllegalStateException("Unknown screen requested!");
+		}
 	}
 
 	@Override
