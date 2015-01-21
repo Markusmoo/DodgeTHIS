@@ -15,6 +15,8 @@ import ca.tonsaker.simplegameengine.engine.InputHandler;
 //TODO Text Alignment
 public class TextField implements MouseListener{
 	
+	public static final int TEXT_INFINITE_LENGTH = -1;
+	
 	public static final int ALIGNMENT_CENTER = 0;
 	public static final int ALIGNMENT_LEFT = 1;
 	public static final int ALIGNMENT_RIGHT = 2;
@@ -22,6 +24,7 @@ public class TextField implements MouseListener{
 	protected Rectangle rect;
 	
 	public String text;
+	protected int textMaxLength = -1;
 	public int textAlignment = ALIGNMENT_CENTER;
 	
 	public int x;
@@ -55,8 +58,8 @@ public class TextField implements MouseListener{
 
 			@Override
 			public void keyTyped(KeyEvent e) {
-				if(specialID == KeyEvent.VK_BACK_SPACE){
-					System.out.println("BAC");
+				if(specialID == KeyEvent.VK_BACK_SPACE && getText().length() > 0){
+					System.out.println("BACK");
 					setText(getText().substring(0, getText().length()-1));
 				}else if(specialID == KeyEvent.VK_DELETE){
 					//TODO Delete last character
@@ -89,6 +92,15 @@ public class TextField implements MouseListener{
 	
 	public int getTextAlignment(){
 		return textAlignment;
+	}
+	
+	public void setTextMaxLength(int max){
+		if(max < -1) throw new IllegalArgumentException("Max text length (textMaxLength >= -1) cannot be value: "+max);
+		textMaxLength = max;
+	}
+	
+	public int getTextMaxLength(){
+		return textMaxLength;
 	}
 	
 	public void setLocation(int x, int y){

@@ -19,7 +19,7 @@ public class HostScreen implements EngineFrame, ActionListener{
 	
 	@Override
 	public void init() {
-		textFieldPort = new TextField(main.getWidth()/4, main.getHeight()/2+main.getHeight()/4,100,50,Integer.toString(Main.port),main.input);
+		textFieldPort = new TextField(main.getWidth()/4, main.getHeight()/2+main.getHeight()/4,100,50,"    ",main.input); //Integer.toString(Main.port)
 		main.addMouseListener(textFieldPort);
 	}
 
